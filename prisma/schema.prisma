@@ -86,17 +86,17 @@ model Order {
   status       OrderStatus @default(PENDING)
   itemsJson    Json
   subtotal     Int
-  deliveryFee  Int?
+  deliveryFee  Int
   total        Int
-  note         String?
-  paymentRef   String?
-  cancelReason String?
-  confirmedAt  DateTime?
-  readyAt      DateTime?
-  completedAt  DateTime?
-  canceledAt   DateTime?
-  refundAmount Int?
-  refundedAt   DateTime?
+  note         String
+  paymentRef   String
+  cancelReason String
+  confirmedAt  DateTime
+  readyAt      DateTime
+  completedAt  DateTime
+  canceledAt   DateTime
+  refundAmount Int
+  refundedAt   DateTime
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
@@ -110,7 +110,7 @@ model Order {
 model QrCode {
   id          String   @id @default(cuid())
   storeId     String
-  tableNumber Int?
+  tableNumber Int
   token       String
   url         String
   modes       String    // comma separated: store,delivery,reservation
@@ -126,9 +126,9 @@ model QrCode {
 model StaffCall {
   id          String   @id @default(cuid())
   storeId     String
-  tableNumber Int?
+  tableNumber Int
   type        String   // WATER/CLEANUP/CHECKOUT/OTHER
-  note        String?
+  note        String
   status      String   @default("PENDING") // PENDING/ACK/DONE
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
