@@ -158,3 +158,18 @@ NEXT_PUBLIC_FREE_MODE_POLL_INTERVAL_MS=600000
 - 관리자 화면은 10분에 1회만 배치 갱신(가시 탭일 때만).
 - 상세 페이지는 자동 갱신 제거, '수동 새로고침' 버튼 제공.
 - 서버 목록/호출 API는 ETag/304로 변화 없으면 본문 전송 없음.
+
+
+---
+## Toss v2 SDK 적용
+- 패키지: `@tosspayments/tosspayments-sdk@^2.3.5`
+- 사용 예시:
+```ts
+import TossPayments from '@tosspayments/tosspayments-sdk';
+const tossPayments = TossPayments(process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY!);
+await tossPayments.payment.requestPayment({
+  method: 'CARD',
+  amount: { value: totalPrice, currency: 'KRW' },
+  orderId, orderName, successUrl, failUrl
+});
+```

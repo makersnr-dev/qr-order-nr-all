@@ -1,6 +1,6 @@
 'use client';
 import { Card, Button, Input, Select } from '@/lib/ui';
-import { loadTossPayments } from '@tosspayments/payment-sdk';
+import TossPayments from '@tosspayments/tosspayments-sdk';
 
 import { useState } from 'react';
 
@@ -37,16 +37,17 @@ export default function StoreOrder({ params }:{ params:{ storeSlug:string }}){
     // 2) Toss 호출
     const clientKey = process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY as string;
     if (!clientKey){ alert('TOSS 클라이언트키가 설정되어 있지 않아요(.env)'); return; }
-    const toss = await loadTossPayments(clientKey);
-    await toss.requestPayment('카드', {
-      amount: subtotal || 100,
-      orderId,
-      orderName: '매장주문',
-      successUrl: `${window.location.origin}/pay/success?orderId=${orderId}`,
-      failUrl: `${window.location.origin}/pay/fail`,
-      cardCompany: undefined
-    });
-  }
+    const tossPayments = TossPayments(clientKey);
+    const tossPayments = TossPayments(clientKey);
+await tossPayments.payment.requestPayment({
+  method: 'CARD',
+  amount: { value: subtotal || 100, currency: 'KRW' },
+  orderId,
+  orderName,
+  successUrl: `${window.location.origin}/pay/success?orderId=${orderId}`,
+  failUrl: `${window.location.origin}/pay/fail`,
+});
+}
   }
 
   return (
