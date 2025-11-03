@@ -144,3 +144,17 @@ TOSS_SECRET_KEY=테스트_시크릿키(test_sk_...)
 4) 승인 성공 시 주문 상태가 `CONFIRM`으로 업데이트
 
 > *2시간 내 제한* 같은 타임아웃 로직은 사용하지 않았습니다.
+
+
+---
+
+## Free-100 모드(v5.1)
+환경변수(로컬/Vercel 둘 다 설정 가능)
+```
+NEXT_PUBLIC_FREE_MODE_STRICT=true
+NEXT_PUBLIC_FREE_MODE_MAX_REQUESTS_PER_DAY=100
+NEXT_PUBLIC_FREE_MODE_POLL_INTERVAL_MS=600000
+```
+- 관리자 화면은 10분에 1회만 배치 갱신(가시 탭일 때만).
+- 상세 페이지는 자동 갱신 제거, '수동 새로고침' 버튼 제공.
+- 서버 목록/호출 API는 ETag/304로 변화 없으면 본문 전송 없음.
