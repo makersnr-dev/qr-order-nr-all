@@ -12,9 +12,9 @@ enum OrderStatus { PENDING CONFIRMED READY COMPLETED CANCELED REFUND_PENDING REF
 
 model User {
   id           String   @id @default(cuid())
-  email        String?  @unique
-  username     String?  @unique
-  passwordHash String?
+  email        String  @unique
+  username     String  @unique
+  passwordHash String
   globalRole   GlobalRole @default(USER)
   createdAt    DateTime @default(now())
   members      StoreMember[]
@@ -27,10 +27,10 @@ model Store {
   id        String   @id @default(cuid())
   slug      String   @unique
   name      String
-  phone     String?
-  address   String?
-  openTime  String?  // "09:00"
-  closeTime String?  // "22:00"
+  phone     String
+  address   String
+  openTime  String  // "09:00"
+  closeTime String  // "22:00"
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
